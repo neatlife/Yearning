@@ -106,3 +106,5 @@ ENV/
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/Yearning.iml
+
+install/yearning-docker-compose/db_data

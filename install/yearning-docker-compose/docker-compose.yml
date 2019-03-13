@@ -9,7 +9,7 @@ services:
       - ./init-sql/:/docker-entrypoint-initdb.d/
     restart: always
     ports:
-      - "3306:3306"
+      - "3406:3306"
     environment:
       MYSQL_ROOT_PASSWORD: yearning
       MYSQL_DATABASE: Yearning
@@ -17,15 +17,23 @@ services:
       MYSQL_PASSWORD: yearning
   yearning:
     image: registry.cn-hangzhou.aliyuncs.com/cookie/yearning:latest
-    depends_on: 
+    depends_on:
       - db
     ports:
-      - "8080:8000"
+      - "9180:8000"
     environment:
       HOST: localhost
       MYSQL_PASSWORD: yearning
       MYSQL_USER: root
       MYSQL_ADDR: db
+  inception:
+    image: hhyo/inception:latest
+    depends_on:
+      - db
+    ports:
+      - "6669:6669"
+    volumes:
+      - ./inc.cnf:/etc/inc.cnf
 
 # 默认账号：admin，默认密码：Yearning_admin
 # 感谢 eacdy 张功震 贡献
